@@ -50,20 +50,25 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		8200,
-		4646
+		8500,
+		4646,
+		9702,
+		9200
 	],
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
-	"postAttachCommand": [
-		"echo \"Run Terraform Commands\"",
-		"code /workspace && sleep 5 && /bin/bash -c 'terraform version'",
-		"echo \"Run Nomad Commands\"",
-		"code /workspace && sleep 5 && /bin/bash -c 'nomad version'",
-		"echo \"Run Consul Commands\"",
-		"code /workspace && sleep 5 && /bin/bash -c 'consul version'",
-		"echo \"Run Vault \"",
-		"code /workspace && sleep 5 && /bin/bash -c 'vault server -dev -dev-root-token-id=root'"
-	],
+	"postAttachCommand": {
+		"vault": "vault server -dev -dev-root-token-id=root && sleep 5",
+		"consul": "consul agent -server -dev && sleep 5",
+		"nomad": "nomad agent -server -dev && sleep 5",
+		"waypoint": "waypoint server run -accept-tos && sleep 5",
+		"boundary": "boundary dev && sleep 5"
+	},
+	// "postAttachCommand": [
+	// 	"consul agent -server -dev",
+	// 	"nomad agent -server -dev",
+	// 	"vault server -dev -dev-root-token-id=root"
+	// ],
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [
 	//     {
@@ -83,7 +88,6 @@
 			]
 		}
 	},
-	
 	"hostRequirements": {
 		"cpus": 4,
 		"memory": "8gb",
