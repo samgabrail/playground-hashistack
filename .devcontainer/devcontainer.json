@@ -58,8 +58,8 @@
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
 	"postAttachCommand": {
-		"vault": "vault server -dev -dev-root-token-id=root && sleep 5",
 		"consul": "consul agent -server -dev && sleep 5",
+		"vault": "vault server -dev -dev-root-token-id=root && sleep 5",
 		"nomad": "nomad agent -server -dev && sleep 5",
 		"waypoint": "waypoint server run -accept-tos && sleep 5",
 		"boundary": "boundary dev && sleep 5"
