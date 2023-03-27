@@ -58,17 +58,12 @@
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	// "postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
 	"postAttachCommand": {
-		"consul": "consul agent -server -dev && sleep 5",
-		"vault": "vault server -dev -dev-root-token-id=root && sleep 5",
-		"nomad": "nomad agent -server -dev && sleep 5",
-		"waypoint": "waypoint server run -accept-tos && sleep 5",
-		"boundary": "boundary dev && sleep 5"
+		"consul": ["consul", "agent", "-server", "-dev"],
+		"vault": ["vault", "server", "-dev", "-dev-root-token-id=root"],
+		"nomad": ["nomad", "agent", "-server", "-dev"],
+		"waypoint": ["waypoint", "server", "run", "-accept-tos"],
+		"boundary": ["boundary", "dev"]
 	},
-	// "postAttachCommand": [
-	// 	"consul agent -server -dev",
-	// 	"nomad agent -server -dev",
-	// 	"vault server -dev -dev-root-token-id=root"
-	// ],
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [
 	//     {
